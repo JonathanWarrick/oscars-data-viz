@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  title: MyString
+  year: 2015-02-16
+  critics_score: 
+  audience_score: 
+  rotten_tomatoes_link: MyText
+  winner: false
+
+two:
+  id: 
+  title: MyString
+  year: 2015-02-16
+  critics_score: 
+  audience_score: 
+  rotten_tomatoes_link: MyText
+  winner: false
