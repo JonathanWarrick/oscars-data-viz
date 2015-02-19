@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'movie#show'
 
   get 'movies' => 'movie#show_year'
+  get 'winners' => 'movie#show_winners'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
