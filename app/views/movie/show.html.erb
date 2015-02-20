@@ -1,3 +1,4 @@
-<% @movies.each do |movie| %>
-  <h1><%= "#{movie.title} (#{movie.year})" %></h1>
-<% end %>
+<svg id="chart"></svg>
+<select>
+	<%= options_for_select(@years) %>
+</select>

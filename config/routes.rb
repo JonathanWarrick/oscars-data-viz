@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'movies' => 'movie#show_year'
   get 'winners' => 'movie#show_winners'
+  get 'movie/data', :defaults => { :format => 'json' }
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

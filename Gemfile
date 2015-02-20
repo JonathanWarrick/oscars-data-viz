@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Make API requests in Rake task
 gem 'rest_client'
+# D3
+gem 'd3-rails'
+gem 'c3-rails'
 
 
 # Use ActiveModel has_secure_password
