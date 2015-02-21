@@ -64,8 +64,6 @@ function fetchWinners() {
         audienceScores.push(movie.audience_score);
         movieYears.push(movie.year + '-01-01');
       });
-
-      debugger;
       
       produceWinnersChart(criticsScores, audienceScores, movieYears);
     },

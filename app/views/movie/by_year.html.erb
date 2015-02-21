@@ -1,8 +1,12 @@
-<h1>This is by year.</h1>
+<div class="row" id="yearSelect">
+	<div class="col-sm-2 col-sm-offset-10">
+		<select>
+			<%= options_for_select(@years) %>
+		</select>
+	</div>
+</div>
+
 <div id="byYearChart"></div>
-<select>
-	<%= options_for_select(@years) %>
-</select>
 
 <%= javascript_tag do %>
   fetchByYear("2014");
