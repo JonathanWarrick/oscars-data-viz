@@ -1,8 +1,9 @@
-function fetchData(year) {
+function fetchByYear(year) {
+  console.log('called');
   $.ajax({
     type: "GET",
     contentType: "application/json; charset=utf-8",
-    url: 'movie/data?year=' + year,
+    url: 'movie/get_by_year?year=' + year,
     dataType: 'json',
     success: function (data) {
       criticsScores = ["Critics"];
@@ -15,7 +16,38 @@ function fetchData(year) {
         movieTitles.push(movie.title);
       });
       
-      produceChart(criticsScores, audienceScores, movieTitles);
+      produceByYearChart(criticsScores, audienceScores, movieTitles);
+    },
+    error: function (result) {
+      error();
+    }
+  });
+}
+
+function fetchAverages() {
+  console.log('fetchAverages called');
+  $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: 'movie/get_averages',
+    dataType: 'json',
+    success: function (data) {
+      console.log(data)
+    },
+    error: function (result) {
+      error();
+    }
+  });
+}  
+
+function fetchWinners() {
+  $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: 'movie/get_winners',
+    dataType: 'json',
+    success: function (data) {
+      console.log(data)
     },
     error: function (result) {
       error();
@@ -23,13 +55,10 @@ function fetchData(year) {
   });
 }  
  
-function error() {
-    console.log("error")
-}
 
-function produceChart(cScores, aScores, titles) {
+function produceByYearChart(cScores, aScores, titles) {
   var chart = c3.generate({
-    bindto: '#chart',
+    bindto: '#byYearChart',
     // remove tooltip for now
     interaction: {
       enabled: false
@@ -51,10 +80,6 @@ function produceChart(cScores, aScores, titles) {
   });
 }
 
-fetchData("2014");
-
-$(function(){
-  $('select').change( function() {
-    fetchData($('option:selected',this).val());
-  });
-});
+function error() {
+    console.log("error")
+}

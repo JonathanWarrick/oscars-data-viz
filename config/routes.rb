@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   get 'winners' => 'movie#winners'
   get 'averages' => 'movie#averages'
 
-  get 'movie/year', :defaults => { :format => 'json' }
-  get 'movie/all', :defaults => { :format => 'json' }
-  get 'movie/winners', :defaults => { :format => 'json' } 
+  get 'movie/get_by_year', :defaults => { :format => 'json' }
+  get 'movie/get_averages', :defaults => { :format => 'json' }
+  get 'movie/get_winners', :defaults => { :format => 'json' } 
 
   # get 'movies' => 'movie#show_year'
   # get 'winners' => 'movie#show_winners'

@@ -1,1 +1,14 @@
 <h1>This is by year.</h1>
+<div id="byYearChart"></div>
+<select>
+	<%= options_for_select(@years) %>
+</select>
+
+<%= javascript_tag do %>
+  fetchByYear("2014");
+  $(function(){
+    $('select').change( function() {
+      fetchByYear($('option:selected',this).val());
+    });
+  });
+<% end %>
