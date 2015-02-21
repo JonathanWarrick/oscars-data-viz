@@ -1,4 +1,11 @@
-<h1>WELCOME</h1>
-<%= link_to 'By Year View', by_year_path %>
-<%= link_to 'Winners View', winners_path %>
-<%= link_to 'Averages View', averages_path %>
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2" id="introduction">
+		<h3>Welcome to The Oscars: By The Numbers!</h3>
+		<p>This short project combines data from <a href="http://www.rottentomatoes.com/">Rotten Tomatoes</a> with movies nominated for "Best Picture" dating back to 1934, providing visualizations that show both the Critics' and Audience Scores for:</p>
+		<ul>
+			<li><%= link_to 'All Nominees By Year', by_year_path %></li>
+			<li><%= link_to 'Winner Of "Best Picture" From 1934 - 2014', winners_path %></li>
+			<li><%= link_to 'Average Score For All Nominees From 1934 - 2014', averages_path %></li>
+		</ul>
+	</div>
+</div>

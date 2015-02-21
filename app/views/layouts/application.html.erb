@@ -7,8 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 headers">
+					<p id="mainHeader">The Oscars</p>
+					<p id="subHeader">...by the numbers</p>
+				</div>
+			  <div class="col-sm-4 links">
+			  	<ul>
+						<li><%= link_to 'By Year', by_year_path %></li>
+						<li><%= link_to 'Winners', winners_path %></li>
+						<li><%= link_to 'Averages', averages_path %></li>
+					</ul>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
 
-<%= yield %>
+		<%= yield %>
 
+	</div>
+	<footer class="footer">
+	  <small>
+	    <a href="http://www.jonathanwarrick.com/">Jonathan Warrick</a>
+	  </small>
+	</footer>
 </body>
 </html>

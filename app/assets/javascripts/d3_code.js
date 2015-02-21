@@ -1,5 +1,4 @@
 function fetchByYear(year) {
-  console.log('called');
   $.ajax({
     type: "GET",
     contentType: "application/json; charset=utf-8",
@@ -25,14 +24,12 @@ function fetchByYear(year) {
 }
 
 function fetchAverages() {
-  console.log('fetchAverages called');
   $.ajax({
     type: "GET",
     contentType: "application/json; charset=utf-8",
     url: 'movie/get_averages',
     dataType: 'json',
     success: function (data) {
-      console.log(data);
       criticsScores = ["Critics"];
       audienceScores = ["Audience"];
       movieYears = ['years'];
