@@ -5,9 +5,9 @@ function fetchData(year) {
     url: 'movie/data?year=' + year,
     dataType: 'json',
     success: function (data) {
-      criticsScores = ["Critics' Scores"];
-      audienceScores = ["Audience's Scores"];
-      movieTitles = ['x'];
+      criticsScores = ["Critics"];
+      audienceScores = ["Audience"];
+      movieTitles = ['titles'];
       
       data.forEach(function(movie) {
         criticsScores.push(movie.critics_score);
@@ -30,13 +30,22 @@ function error() {
 function produceChart(cScores, aScores, titles) {
   var chart = c3.generate({
     bindto: '#chart',
+    // remove tooltip for now
+    interaction: {
+      enabled: false
+    },
+    // default transition to 500ms
+    transition: {
+      duration: 1200
+    },
     data: {
-      columns: [cScores, aScores],
+      x: 'titles',
+      columns: [titles, cScores, aScores],
       type: 'bar'
     },
-    bar: {
-      width: {
-        ratio: 0.5 // this makes bar width 50% of length between ticks
+    axis: {
+      x: {
+        type: 'category' // this needed to load string x value
       }
     }
   });

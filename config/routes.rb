@@ -4,11 +4,18 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'movie#show'
+  root 'movie#home'
+  get 'by_year' => 'movie#by_year'
+  get 'winners' => 'movie#winners'
+  get 'averages' => 'movie#averages'
 
-  get 'movies' => 'movie#show_year'
-  get 'winners' => 'movie#show_winners'
-  get 'movie/data', :defaults => { :format => 'json' }
+  get 'movie/year', :defaults => { :format => 'json' }
+  get 'movie/all', :defaults => { :format => 'json' }
+  get 'movie/winners', :defaults => { :format => 'json' } 
+
+  # get 'movies' => 'movie#show_year'
+  # get 'winners' => 'movie#show_winners'
+  # get 'movie/data', :defaults => { :format => 'json' }
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
