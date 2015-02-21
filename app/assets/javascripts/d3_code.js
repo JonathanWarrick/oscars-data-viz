@@ -73,6 +73,35 @@ function fetchWinners() {
   });
 }  
 
+function fetchWinnersVsAverages() {
+  $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: 'movie/get_winners_vs_averages',
+    dataType: 'json',
+    success: function (data) {
+      criticsScores = ["Critics"];
+      audienceScores = ["Audience"];
+      winnerCriticsScores = ["Winners Critics"];
+      winnerAudienceScores = ["Winners Audience"]
+      movieYears = ['years'];
+
+      for(var i = 1934; i <= 2014; i++) {
+        movieYears.push('' + i + '-01-01');
+        criticsScores.push(data.critics_scores[i.toString()]);
+        audienceScores.push(data.audience_scores[i.toString()]);
+        winnerCriticsScores.push(data.winner_critics_scores[i.toString()]);
+        winnerAudienceScores.push(data.winner_audience_scores[i.toString()]);
+      }
+
+      produceWinnerVsAveragesChart(criticsScores, audienceScores, winnerCriticsScores, winnerAudienceScores, movieYears);
+    },
+    error: function (result) {
+      error();
+    }
+  });
+}
+
 function produceByYearChart(cScores, aScores, titles) {
   var chart = c3.generate({
     bindto: '#byYearChart',
@@ -129,6 +158,45 @@ function produceWinnersChart(cScores, aScores, years) {
     data: {
       x: 'years',
       columns: [years, cScores, aScores]
+    }, 
+    axis: {
+      x: {
+        type: 'timeseries',
+        tick: {
+          format: '%Y',
+          values: [
+            '1934-01-01', 
+            '1940-01-01',
+            '1950-01-01',
+            '1960-01-01',
+            '1970-01-01',
+            '1980-01-01',
+            '1990-01-01',
+            '2000-01-01',
+            '2010-01-01',
+            '2014-01-01'
+          ]
+        }
+      },
+      y: {
+        tick: {
+          values: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        }
+      }
+    }
+  });
+}
+
+function produceWinnerVsAveragesChart(cScores, aScores, wcScores, waScores, years) {
+  var chart = c3.generate({
+    bindto: '#winnersVsAveragesChart',
+    // remove tooltip for now
+    interaction: {
+      enabled: false
+    },
+    data: {
+      x: 'years',
+      columns: [years, cScores, aScores, wcScores, waScores]
     }, 
     axis: {
       x: {

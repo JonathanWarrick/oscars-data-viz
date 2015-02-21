@@ -39,4 +39,17 @@ class MovieController < ApplicationController
       }
     end
   end
+
+    def get_winners_vs_averages
+      respond_to do |format|
+        format.json {
+  				render json: {
+  					:critics_scores => Movie.group(:year).average(:critics_score),
+  					:audience_scores => Movie.group(:year).average(:audience_score),
+  					:winner_critics_scores => Movie.where(:winner => true).group(:year).average(:critics_score),
+  					:winner_audience_scores => Movie.where(:winner => true).group(:year).average(:audience_score)
+  				}
+        }
+      end
+    end
 end
