@@ -5,17 +5,28 @@ function fetchByYear(year) {
     url: 'movie/get_by_year?year=' + year,
     dataType: 'json',
     success: function (data) {
-      criticsScores = ["Critics"];
-      audienceScores = ["Audience"];
-      movieTitles = ['titles'];
+      var criticsScores = ["Critics"];
+      var audienceScores = ["Audience"];
+      var movieTitles = ['titles'];
+      var winnerIndex;
       
-      data.forEach(function(movie) {
+      data.forEach(function(movie, index) {
         criticsScores.push(movie.critics_score);
         audienceScores.push(movie.audience_score);
         movieTitles.push(movie.title);
+        if (movie.winner) {
+          winnerIndex = index;
+        }
       });
       
-      produceByYearChart(criticsScores, audienceScores, movieTitles);
+      produceByYearChart(criticsScores, audienceScores, movieTitles, winnerIndex, year);
+      if (year !== "2014") {
+        setTimeout(function() {
+          var selection = '.c3-bar-' + winnerIndex;
+          d3.select('.c3-bars-Critics').select(selection).style("fill", "yellow");
+          d3.select('.c3-bars-Audience').select(selection).style("fill", "red");
+        }, 1000)
+      }
     },
     error: function (result) {
       error();
@@ -30,9 +41,9 @@ function fetchAverages() {
     url: 'movie/get_averages',
     dataType: 'json',
     success: function (data) {
-      criticsScores = ["Critics"];
-      audienceScores = ["Audience"];
-      movieYears = ['years'];
+      var criticsScores = ["Critics"];
+      var audienceScores = ["Audience"];
+      var movieYears = ['years'];
 
       for(var i = 1934; i <= 2014; i++) {
         movieYears.push('' + i + '-01-01');
@@ -55,9 +66,9 @@ function fetchWinners() {
     url: 'movie/get_winners',
     dataType: 'json',
     success: function (data) {
-      criticsScores = ["Critics"];
-      audienceScores = ["Audience"];
-      movieYears = ['years'];
+      var criticsScores = ["Critics"];
+      var audienceScores = ["Audience"];
+      var movieYears = ['years'];
       
       data.forEach(function(movie) {
         criticsScores.push(movie.critics_score);
@@ -80,11 +91,11 @@ function fetchWinnersVsAverages() {
     url: 'movie/get_winners_vs_averages',
     dataType: 'json',
     success: function (data) {
-      criticsScores = ["Critics"];
-      audienceScores = ["Audience"];
-      winnerCriticsScores = ["Winners Critics"];
-      winnerAudienceScores = ["Winners Audience"]
-      movieYears = ['years'];
+      var criticsScores = ["Critics"];
+      var audienceScores = ["Audience"];
+      var winnerCriticsScores = ["Winners Critics"];
+      var winnerAudienceScores = ["Winners Audience"]
+      var movieYears = ['years'];
 
       for(var i = 1934; i <= 2014; i++) {
         movieYears.push('' + i + '-01-01');
@@ -102,7 +113,7 @@ function fetchWinnersVsAverages() {
   });
 }
 
-function produceByYearChart(cScores, aScores, titles) {
+function produceByYearChart(cScores, aScores, titles, winnerIndex, year) {
   var chart = c3.generate({
     bindto: '#byYearChart',
     // remove tooltip for now
@@ -111,7 +122,7 @@ function produceByYearChart(cScores, aScores, titles) {
     },
     // default transition to 500ms
     transition: {
-      duration: 1200
+      // duration: 1200
     },
     data: {
       x: 'titles',
@@ -124,6 +135,7 @@ function produceByYearChart(cScores, aScores, titles) {
       }
     }
   });
+  console.log('test2');
 }
 
 function produceAveragesChart(cScores, aScores, years) {
