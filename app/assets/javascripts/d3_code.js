@@ -135,7 +135,6 @@ function produceByYearChart(cScores, aScores, titles, winnerIndex, year) {
       }
     }
   });
-  console.log('test2');
 }
 
 function produceAveragesChart(cScores, aScores, years) {
