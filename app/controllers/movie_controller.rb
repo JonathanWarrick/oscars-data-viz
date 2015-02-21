@@ -35,7 +35,7 @@ class MovieController < ApplicationController
 		year = params[:year]
     respond_to do |format|
       format.json {
-				render json: Movie.where(:winner => true).to_a
+				render json: Movie.where(:winner => true).order(:year).to_a
       }
     end
   end

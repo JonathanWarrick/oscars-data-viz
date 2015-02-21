@@ -58,7 +58,19 @@ function fetchWinners() {
     url: 'movie/get_winners',
     dataType: 'json',
     success: function (data) {
-      console.log(data)
+      criticsScores = ["Critics"];
+      audienceScores = ["Audience"];
+      movieYears = ['years'];
+      
+      data.forEach(function(movie) {
+        criticsScores.push(movie.critics_score);
+        audienceScores.push(movie.audience_score);
+        movieYears.push(movie.year + '-01-01');
+      });
+
+      debugger;
+      
+      produceWinnersChart(criticsScores, audienceScores, movieYears);
     },
     error: function (result) {
       error();
@@ -114,7 +126,7 @@ function produceAveragesChart(cScores, aScores, years) {
 
 function produceWinnersChart(cScores, aScores, years) {
   var chart = c3.generate({
-    bindto: '#averagesChart',
+    bindto: '#winnersChart',
     // remove tooltip for now
     interaction: {
       enabled: false
